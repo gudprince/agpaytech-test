@@ -51,6 +51,8 @@ class CountryController
         $country_id = $parameters['id'];
         $country = $this->countriesTable->findById($country_id);
         if ($country) {
+            $currency = $this->currenciesTable->find('iso_code', $country['currency_code']);
+            $country['currency'] =  $currency;
             $message = 'Country Retrieved Successfully';
 
             return $this->jsonResponse(200, $message, $country);
@@ -64,7 +66,7 @@ class CountryController
     public function save()
     {
         try {
-            // $currency = json_decode($_POST['currency']);
+
             if (!empty($_FILES['country']['tmp_name'])) {
                 $check1 = $this->validateFile($_FILES['country']);
                 $check2 = $this->validateCountryCsvHeader($_FILES['country']['tmp_name']);

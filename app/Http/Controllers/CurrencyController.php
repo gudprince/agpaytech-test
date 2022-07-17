@@ -68,7 +68,7 @@ class CurrencyController
     {
         try {
             //$currency = $_POST['currency'];
-            
+
             if (!empty($_FILES['currency']['tmp_name'])) {
                 $check_1 = $this->validateFile($_FILES['currency']);
                 $check_2 = $this->validateCurrencyCsvHeader($_FILES['currency']['tmp_name']);
